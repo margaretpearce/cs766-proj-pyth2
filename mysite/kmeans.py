@@ -1,12 +1,10 @@
 from sklearn.cluster import KMeans
-
-import matplotlib as mpl
-mpl.use('TkAgg')
-
 import cv2
 
-def kmeansclustering(image, k):
-    if image is not None:
+def kmeansclustering(path, k):
+    if path is not None:
+        image = cv2.imread(path)
+
         # Convert from BGR to LAB
         image = cv2.cvtColor(image, cv2.cv.CV_BGR2Lab)
 
