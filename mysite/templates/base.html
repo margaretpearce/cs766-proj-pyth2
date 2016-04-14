@@ -88,5 +88,32 @@
 <script src="./static/js/docs.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="./static/js/ie10-viewport-bug-workaround.js"></script>
+
+<!-- Extra scripts for file upload, etc -->
+<script src="./static/js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="./static/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="./static/js/jquery.fileupload-process.js"></script>
+<script type="text/javascript" src="./static/js/jquery.fileupload-ui.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $('#imgupload').fileupload({
+            url: 'upload',
+            dataType: 'json',
+            replaceFileInput: false,
+            add: function(e, data) {
+                data.submit();
+                console.log("here");
+            },
+            success: function(response, status) {
+                console.log(response);
+                $('#imgUploaded').attr('src', '/static/uploads/' + response.filename);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    })
+</script>
 </body>
 </html>

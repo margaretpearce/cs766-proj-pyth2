@@ -1,16 +1,36 @@
 from flask import Flask
-from flask import render_template, send_file
+from flask import render_template, send_file, request, json, session
 from mysite import kmeans
 from PIL import Image
 from io import BytesIO
+import os
+import uuid
 
 app = Flask(__name__)
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(APP_ROOT, 'static/uploads/')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 @app.route('/index')
 def index():
     user = {'nickname': 'World'}	#fake user
     return render_template('index.html', title='Home', user=user)
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    # file upload code here
+    if request.method == 'POST':
+        file = request.files['file']
+        extension = os.path.splitext(file.filename)[1]
+        f_name = str(uuid.uuid4()) + extension
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], f_name))
+
+        # Save the filename in session
+        # session['imgfile_to_segment'] = f_name
+
+        return json.dumps({'filename':f_name})
 
 @app.route('/about')
 def about():
