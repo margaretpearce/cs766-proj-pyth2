@@ -11,6 +11,7 @@ app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'static/uploads/')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 
 @app.route('/')
 @app.route('/index')
@@ -28,7 +29,7 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], f_name))
 
         # Save the filename in session
-        # session['imgfile_to_segment'] = f_name
+        session['imgfile_to_segment'] = f_name
 
         return json.dumps({'filename':f_name})
 
@@ -47,7 +48,11 @@ def kmeansapp():
 @app.route('/detect')
 def detect():
     # Read image from disk
-    img_path = "/home/mlpearce/mysite/static/baboon.jpg"
+    # img_path = "/home/mlpearce/mysite/static/baboon.jpg"
+    img_path = "/home/mlpearce/mysite/static/uploads/914f4b95-06ef-4982-ae33-97db330c0149.jpg"
+
+    if 'imgfile_to_segment' in session:
+        img_path = '/home/mlpearce/mysite/static/uploads/'+session['imgfile_to_segment']
 
     # Fix the number of clusters
     k = 3
