@@ -22,22 +22,24 @@
 # Registers:
 
 # File marks:
-'0  2  17  ~/.gitignore
+'0  2  6  ~/.gitignore
 '1  1  0  ~/mysite/manage.py
 
 # Jumplist (newest first):
--'  2  17  ~/.gitignore
+-'  2  6  ~/.gitignore
 -'  1  0  ~/.gitignore
+-'  1  0  ~/mysite/manage.py
+-'  1  0  ~/mysite/manage.py
 -'  1  0  ~/mysite/manage.py
 -'  1  0  ~/mysite/manage.py
 
 # History of marks within files (newest to oldest):
 
 > ~/.gitignore
-	"	2	17
-	^	2	18
-	.	2	17
-	+	2	17
+	"	2	6
+	^	2	7
+	.	2	7
+	+	2	7
 
 > ~/mysite/manage.py
 	"	1	0

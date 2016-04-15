@@ -3,6 +3,7 @@ import cv2
 
 def kmeansclustering(path, k):
     if path is not None:
+        # Read in the image
         image = cv2.imread(path)
 
         # Convert from BGR to LAB
@@ -24,5 +25,4 @@ def kmeansclustering(path, k):
 
         return quant
     else:
-        print("none error!!!!!!!!")
         return None
