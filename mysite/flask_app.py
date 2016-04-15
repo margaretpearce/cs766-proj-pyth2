@@ -84,4 +84,4 @@ def detect():
         # Return file URL and time taken to do kmeans
         return json.dumps({'filename':filename, 'time':runtime})
     else:
-        print >> sys.stderr, "Could not run kmeans: image not saved in session"
+        print "Could not run kmeans: image not saved in session"

@@ -96,7 +96,8 @@
 <script type="text/javascript" src="./static/js/jquery.fileupload-ui.js"></script>
 
 <script type="text/javascript">
-    $(function() {
+    $(document).ready(function() {
+        // Upload an image, show preview
         $('#imgupload').fileupload({
             url: 'upload',
             dataType: 'json',
@@ -105,25 +106,66 @@
                 data.submit();
             },
             success: function(response, status) {
-                // Show thumbnail preview
                 $('#imgUploaded').attr('src', '/static/uploads/' + response.filename);
-
-                // Call detect to set source of kmeans image
-                $.get({
-                    url: '/detect',
-                    dataType: 'json',
-                    success: function(detectdata) {
-                        // Update kmeans image source to the processed result
-                        $('#kmeans_img').attr('src', '/static/uploads/' + detectdata.filename);
-                        $('#kmeans_time').text('Time taken: ' + detectdata.time + ' seconds' );
-                    }
-                });
             },
             error: function(error) {
                 console.log(error);
             }
         });
-    })
+
+        // Handle button click to run algorithms
+        $("#processbutton").click(function() {
+            // Set and show progress bars
+            var progvalue = 10;
+            updateProgess(progvalue, true);
+            $("#progress_bars").show();
+
+            // K-Means
+            $.get({
+                url: '/detect',
+                dataType: 'json',
+                success: function(detectdata) {
+                    $('#kmeans_img').attr('src', '/static/uploads/' + detectdata.filename);
+                    $('#kmeans_time').text('Time taken: ' + detectdata.time + ' seconds' );
+                    progvalue = progvalue + 22.5;
+
+                    // Update progress bars
+                    //$('.progress-bar').css('width', progvalue+'%').attr('aria-valuenow', progvalue);
+                    //$('.progress-bar').text(progvalue + '% Complete');
+                    updateProgess(progvalue, true);
+                }
+            });
+
+            // Other algorithms here...
+
+            // Stop animating the progress bar + input, show results
+            $("#app").hide();
+            updateProgess(progvalue, false);
+            $("#app_results").show();
+        });
+
+        // Update value of progress bar and toggle animation
+        updateProgess = function(progvalue, keepanimated) {
+            if (keepanimated === 'true') {
+                $('.progress-bar').addClass('active');
+            } else {
+                $('.progress-bar').removeClass('active');
+            }
+
+            $('.progress-bar').css('width', progvalue+'%').attr('aria-valuenow', progvalue);
+            $('.progress-bar').text(progvalue + '% Complete');
+        }
+
+        // Handle button click to restart segmentation
+        $("#restart_segmentation").click(function() {
+            // Hide results, keep progress bars hidden, show app
+            $("#app_results").hide();
+            $("#app").show();
+            $("#progress_bars").hide();
+
+            // Reset progress bars
+        });
+    });
 </script>
 </body>
 </html>

@@ -7,6 +7,7 @@
     </div>
 
     <!-- Header and brief description -->
+    <div id="app">
     <div class="page-header" id="app_intro">
         <h1>Try it out!</h1>
     </div>
@@ -21,7 +22,7 @@
         </div>
         <div class="panel-body">
 
-            <form role="form" method="post" action="/showimg">
+            <form role="form" method="post">
             <div class="input-group">
                 <label for="imgupload">Select photo</label> <br/>
                 <input type="file" id="imgupload" name="file" accept=".png, .jpg, .jpeg, .gif, .tiff" />
@@ -29,39 +30,30 @@
                     <img id="imgUploaded" style="width: 140px; height: 140px;" class="img-thumgnail" />
                 </div>
                 <p>
-                    <input id="singlebutton" name="singlebutton" class="btn btn-lg btn-primary" type="submit" value="Process" />
+                    <button id="processbutton" name="processbutton" class="btn btn-lg btn-primary" type="button">Segment image</button>
                 </p>
 
             </div>
         </form>
-
-            <!-- <div class="container"> -->
-                <!-- <!-- Image preview area -->
-                <!-- <img src="./static/images/baboon.jpg" /> -->
-            <!-- </div> -->
-            <!-- <div> -->
-                <!-- Buttons -->
-                <!-- <button type="button" class="btn btn-lg btn-default">Pick image</button> <button type="button" class="btn btn-lg btn-primary">Segment</button> -->
-            <!-- </div>-->
-
         </div>
     </div>
+    </div>
 
-    <!-- Progress bars (hide by default) -->
-    <div id="progress_bars">
+    <!-- Progress bars (hidden by default) -->
+    <div id="progress_bars" style="display: none;">
         <h3>Progress</h3>
         <!-- In progress or successful -->
         <div class="progress">
-            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"><span class="sr-only">60% Complete</span></div>
+            <div id="progress_bar" class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">0% Complete</div>
         </div>
         <!-- If error occurs -->
-        <div class="progress has-error">
-            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"><span class="sr-only">80% Complete (danger)</span></div>
+        <div class="progress has-error" style="display: none;">
+            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">0% Complete (danger)</div>
         </div>
     </div>
 
-    <!-- Results panel (hide by default) -->
-    <div id="app_results">
+    <!-- Results panel (hidden by default) -->
+    <div id="app_results" style="display: none;">
         <!-- Header and brief description -->
         <div class="page-header" id="results_intro">
             <h2>Results</h2>
@@ -124,7 +116,7 @@
         </div> <!-- end row -->
 
         <!-- button to try another image -->
-        <button type="button" class="btn btn-lg btn-default">Segment another image</button>
+        <button id="restart_segmentation" type="button" class="btn btn-lg btn-default">Segment another image</button>
 
     </div> <!-- end app results -->
 
