@@ -13,3 +13,4 @@
 .pythonstartup.py
 .viminfo
 .vimrc
+/mysite/static/uploads/*
