@@ -1,3 +1,15 @@
 /key.py
 /mysite/key.py
 *.pyc
+.cache/
+.cache/*
+.ssh/
+.ssh/*
+.virtualenvs/
+.virtualenvs/*
+.bashrc
+.profile
+.python_history
+.pythonstartup.py
+.viminfo
+.vimrc
