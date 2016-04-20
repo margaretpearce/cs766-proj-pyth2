@@ -1,10 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-    <h1>Image Segmentation</h1>
-    <p>Divide an image into <i>regions</i> or <i>categories</i> which correspond to different objects or parts of objects [1]</p>
-</div>
 
 <!-- Header and brief description -->
 <div class="page-header" id="app_intro">
@@ -26,9 +21,20 @@
     </div>
 </div>
 
+<div class="panel panel-primary" id="about_meanshift">
+    <div class="panel-heading">
+        <h3 class="panel-title">Mean Shift</h3>
+    </div>
+    <div class="panel-body">
+        <div class="container">
+            About mean shift
+        </div>
+    </div>
+</div>
+
 <div class="panel panel-primary" id="about_threshold">
     <div class="panel-heading">
-        <h3 class="panel-title">Threshold</h3>
+        <h3 class="panel-title">Intensity Thresholding</h3>
     </div>
     <div class="panel-body">
         <div class="container">
@@ -39,7 +45,7 @@
 
 <div class="panel panel-primary" id="about_graph">
     <div class="panel-heading">
-        <h3 class="panel-title">Graph</h3>
+        <h3 class="panel-title">Graph Cut</h3>
     </div>
     <div class="panel-body">
         <div class="container">
@@ -61,9 +67,9 @@
 
 <!-- Footnotes -->
 <div class="page-footer" id="footer">
-    <p>References:</p>
+    <!-- <p>References:</p>
     <p>
         [1] http://www.bioss.ac.uk/people/chris/ch4.pdf
-    </p>
+    </p> -->
 </div>
 {% endblock %}

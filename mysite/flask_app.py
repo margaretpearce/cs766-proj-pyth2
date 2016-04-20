@@ -1,10 +1,9 @@
 from flask import Flask
 from flask import render_template, request, json, session
-from mysite import kmeans, key
+from mysite import kmeans, key, intensity
 from PIL import Image
 import os
 import uuid
-import sys
 import time
 
 app = Flask(__name__)
@@ -18,6 +17,10 @@ app.secret_key = key.get_key();
 @app.route('/index')
 def index():
     return render_template('index.html', title='Home')
+
+@app.route('/splash')
+def splash():
+    return render_template('splash.html')
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -54,8 +57,8 @@ def examples():
 def kmeansapp():
     return render_template('kmeans.html', title='K Means')
 
-@app.route('/detect')
-def detect():
+@app.route('/runkmeans')
+def runkmeans():
     img_path = ""
     folder_path = ""
 
@@ -82,6 +85,35 @@ def detect():
         runtime = end - start
 
         # Return file URL and time taken to do kmeans
-        return json.dumps({'filename':filename, 'time':runtime})
+        return json.dumps({'filename':filename, 'time':runtime, 'k':k})
     else:
         print "Could not run kmeans: image not saved in session"
+
+@app.route('/runthresholding')
+def runthresholding():
+    img_path = ""
+    folder_path = ""
+
+    # Start a timer
+    start = time.time()
+
+    # Read original image from session variable
+    if 'imgfile_original' in session:
+        img_path = os.path.join(app.config['UPLOAD_FOLDER'], session['imgfile_original'])
+        folder_path = str(session['imgfile_original']).split('/')[0]
+
+    if img_path is not None:
+        # Do thresholding
+        result, thres = intensity.thresholding(img_path)
+        img = Image.fromarray(result)
+        filename = folder_path + '/thresholding.png'
+        img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        # Stop the timer
+        end = time.time()
+        runtime = end - start
+
+        # Return file URL and time taken to do kmeans
+        return json.dumps({'filename':filename, 'time':runtime, 'thres': thres})
+    else:
+        print "Could not run intensity thresholding: image not saved in session"

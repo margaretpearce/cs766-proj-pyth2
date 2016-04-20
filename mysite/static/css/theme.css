@@ -16,3 +16,11 @@ body {
 .theme-showcase .navbar .container {
     width: auto;
 }
+
+.panel-body-left, .panel-body-right {
+    float: left;
+}
+
+.panel-body-right {
+    padding: 10pt;
+}

@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <h1>Image Segmentation</h1>
-        <p>Divide an image into <i>regions</i> or <i>categories</i> which correspond to different objects or parts of objects [1]</p>
-    </div>
 
     <!-- Header and brief description -->
     <div id="app">
@@ -71,8 +67,32 @@
                         <h3 class="panel-title">K-Means Clustering</h3>
                     </div>
                     <div class="panel-body">
-                        <img id="kmeans_img" style="width: 140px; height: 140px;" class="img-thumgnail" />
-                        <div id="kmeans_time"></div>
+                        <div class="panel-body-left">
+                            <img id="kmeans_img" style="width: 140px; height: 140px; float: left;" class="img-thumbnail" />
+                        </div>
+                        <div class="panel-body-right">
+                            <p><b>Type:</b> Clustering</p>
+                            <div id="kmeans_time"></div>
+                            <div id="kmeans_parameters"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <!-- Mean Shift -->
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Mean Shift</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel-body-left">
+                            <img id="meanshift_img" style="width: 140px; height: 140px;" class="img-thumbnail" />
+                        </div>
+                        <div class="panel-body-right">
+                            <p><b>Type:</b> Clustering</p>
+                            <div id="meanshift_time"></div>
+                            <div id="meanshift_parameters"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,7 +103,14 @@
                         <h3 class="panel-title">Thresholding</h3>
                     </div>
                     <div class="panel-body">
-                        Image, time
+                        <div class="panel-body-left">
+                            <img id="thresholding_img" style="width: 140px; height: 140px;" class="img-thumbnail" />
+                        </div>
+                        <div class="panel-body-right">
+                            <p><b>Type:</b> Intensity based</p>
+                            <div id="thresholding_time"></div>
+                            <div id="thresholding_parameters"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -95,10 +122,17 @@
                 <!-- Graph -->
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Graph</h3>
+                        <h3 class="panel-title">Graph Cut</h3>
                     </div>
                     <div class="panel-body">
-                        Image, time
+                        <div class="panel-body-left">
+                            <img id="graphcut_img" style="width: 140px; height: 140px;" class="img-thumbnail" />
+                        </div>
+                        <div class="panel-body-right">
+                            <p><b>Type:</b> Graph</p>
+                            <div id="graphcut_time"></div>
+                            <div id="graphcut_parameters"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,10 +140,17 @@
             <div class="col-lg-6">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Hybrid</h3>
+                        <h3 class="panel-title">Hybrid (Clustering + Threshold)</h3>
                     </div>
                     <div class="panel-body">
-                        Image, time
+                        <div class="panel-body-left">
+                            <img id="hybrid_img" style="width: 140px; height: 140px;" class="img-thumbnail" />
+                        </div>
+                        <div class="panel-body-right">
+                            <p><b>Type:</b> Hybrid</p>
+                            <div id="hybrid_time"></div>
+                            <div id="hybrid_parameters"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,6 +164,5 @@
 
     <!-- Footnotes -->
     <div class="page-footer" id="footer">
-        [1] http://www.bioss.ac.uk/people/chris/ch4.pdf
     </div>
 {% endblock %}

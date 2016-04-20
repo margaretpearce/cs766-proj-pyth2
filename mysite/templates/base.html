@@ -48,20 +48,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index">Image Segmentation</a>
+            <a class="navbar-brand" href="splash">Image Segmentation</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="index#app_intro">Try the App</a></li>
+                <li><a href="index">Try the App</a></li>
                 <li class="dropdown">
                     <a href="about" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="about">About</a></li>
                         <li role="separator" class="divider"></li>
                         <li class="dropdown-header">Algorithms</li>
-                        <li><a href="about#about_kmeanskmeans">K-Means</a></li>
-                        <li><a href="about#about_threshold">Threshold</a></li>
-                        <li><a href="about#about_graph">Graph</a></li>
+                        <li><a href="about#about_kmeans">K-Means Clustering</a></li>
+                        <li><a href="about#about_meanshift">Mean Shift</a></li>
+                        <li><a href="about#about_threshold">Thresholding</a></li>
+                        <li><a href="about#about_graph">Graph Cut</a></li>
                         <li><a href="about#about_hybrid">Hybrid</a></li>
                     </ul>
                 </li>
@@ -117,30 +118,44 @@
         $("#processbutton").click(function() {
             // Set and show progress bars
             var progvalue = 10;
-            updateProgess(progvalue, true);
+            updateProgess(progvalue, 'true');
             $("#progress_bars").show();
 
             // K-Means
             $.get({
-                url: '/detect',
+                url: '/runkmeans',
                 dataType: 'json',
-                success: function(detectdata) {
-                    $('#kmeans_img').attr('src', '/static/uploads/' + detectdata.filename);
-                    $('#kmeans_time').text('Time taken: ' + detectdata.time + ' seconds' );
+                success: function(kmeans_data) {
+                    $('#kmeans_img').attr('src', '/static/uploads/' + kmeans_data.filename);
+                    $('#kmeans_time').text('Time taken: ' + kmeans_data.time + ' seconds' );
+                    $('#kmeans_parameters').text('Value of k: ' + kmeans_data.k);
                     progvalue = progvalue + 22.5;
 
                     // Update progress bars
-                    //$('.progress-bar').css('width', progvalue+'%').attr('aria-valuenow', progvalue);
-                    //$('.progress-bar').text(progvalue + '% Complete');
-                    updateProgess(progvalue, true);
+                    updateProgess(progvalue, 'true');
                 }
+            });
+
+            // Thresholding
+            $.get({
+               url: '/runthresholding' ,
+               dataType: 'json',
+               success: function(thres_data) {
+                    $('#thresholding_img').attr('src', '/static/uploads/' + thres_data.filename);
+                    $('#thresholding_time').text('Time taken: ' + thres_data.time + ' seconds' );
+                    $('#thresholding_parameters').text('Threshold value: ' + thres_data.thres);
+                    progvalue = progvalue + 22.5;
+
+                    // Update progress bars
+                    updateProgess(progvalue, 'true');
+               }
             });
 
             // Other algorithms here...
 
             // Stop animating the progress bar + input, show results
             $("#app").hide();
-            updateProgess(progvalue, false);
+            updateProgess(progvalue, 'false');
             $("#app_results").show();
         });
 
