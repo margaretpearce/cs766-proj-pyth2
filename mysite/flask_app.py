@@ -33,8 +33,8 @@ def upload():
 
         # Read to opencv for resizing
         im = cv2.imdecode(image, cv2.IMREAD_COLOR)
-        height = im.shape[1]
-        width = im.shape[0]
+        height = im.shape[0]
+        width = im.shape[1]
 
         mult_x = 1
         mult_y = 1

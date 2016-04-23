@@ -108,6 +108,11 @@
             },
             success: function(response, status) {
                 $('#imgUploaded').attr('src', '/static/uploads/' + response.filename);
+
+                // Enable segment button
+                $('#processbutton').prop('disabled', false);
+                $('#processbutton').removeClass('btn-secondary');
+                $('#processbutton').addClass('btn-primary');
             },
             error: function(error) {
                 console.log(error);
@@ -156,12 +161,13 @@
             // Stop animating the progress bar + input, show results
             $("#app").hide();
             updateProgess(progvalue, 'false');
+            $("#progress_bars").hide();
             $("#app_results").show();
         });
 
         // Update value of progress bar and toggle animation
         updateProgess = function(progvalue, keepanimated) {
-            if (keepanimated === 'true') {
+            if (keepanimated) {
                 $('.progress-bar').addClass('active');
             } else {
                 $('.progress-bar').removeClass('active');
@@ -179,6 +185,10 @@
             $("#progress_bars").hide();
 
             // Reset progress bars
+            updateProgess(0, 'false');
+
+            // Disable segment button
+
         });
     });
 </script>

@@ -19,8 +19,28 @@ body {
 
 .panel-body-left, .panel-body-right {
     float: left;
+    margin: auto;
+    width: 50%;
 }
 
 .panel-body-right {
     padding: 10pt;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
 }

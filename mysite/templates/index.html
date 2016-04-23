@@ -19,16 +19,18 @@
         <div class="panel-body">
 
             <form role="form" method="post">
-            <div class="input-group">
-                <label for="imgupload">Select photo</label> <br/>
-                <input type="file" id="imgupload" name="file" accept=".png, .jpg, .jpeg, .gif, .tiff" />
-                <div>
-                    <img id="imgUploaded" style="width: 140px; height: 140px;" class="img-thumgnail" />
+            <div class="input-group" style="margin: auto; width: 100%;">
+                <div style="float: left; width: 50%; margin: auto;">
+                    <img id="imgUploaded" style="width: 300px; height: 300px; margin: auto; display: block;" class="img-thumbnail" />
                 </div>
-                <p>
-                    <button id="processbutton" name="processbutton" class="btn btn-lg btn-primary" type="button">Segment image</button>
-                </p>
-
+                <div style="float: left; width: 50%; margin: auto;">
+                    <div class="fileUpload btn btn-primary btn-lg" style="margin: auto; display: block; width: 60%">
+                        <span>Upload</span>
+                        <input type="file" id="imgupload" name="file" accept=".png, .jpg, .jpeg" class="upload" />
+                    </div>
+                    <br/>
+                    <button id="processbutton" name="processbutton" disabled="disabled" class="btn btn-lg btn-secondary" type="button" style="margin: auto; display: block; width: 60%">Segment image</button>
+                </div>
             </div>
         </form>
         </div>
@@ -68,7 +70,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="panel-body-left">
-                            <img id="kmeans_img" style="width: 140px; height: 140px; float: left;" class="img-thumbnail" />
+                            <img id="kmeans_img" style="margin: auto; display: block;" class="img-thumbnail" />
                         </div>
                         <div class="panel-body-right">
                             <p><b>Type:</b> Clustering</p>
@@ -86,7 +88,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="panel-body-left">
-                            <img id="meanshift_img" style="width: 140px; height: 140px;" class="img-thumbnail" />
+                            <img id="meanshift_img" style="margin: auto; display: block;" class="img-thumbnail" />
                         </div>
                         <div class="panel-body-right">
                             <p><b>Type:</b> Clustering</p>
@@ -104,7 +106,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="panel-body-left">
-                            <img id="thresholding_img" style="width: 140px; height: 140px;" class="img-thumbnail" />
+                            <img id="thresholding_img" style="margin: auto; display: block;" class="img-thumbnail" />
                         </div>
                         <div class="panel-body-right">
                             <p><b>Type:</b> Intensity based</p>
@@ -126,7 +128,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="panel-body-left">
-                            <img id="graphcut_img" style="width: 140px; height: 140px;" class="img-thumbnail" />
+                            <img id="graphcut_img" style="margin: auto; display: block;" class="img-thumbnail" />
                         </div>
                         <div class="panel-body-right">
                             <p><b>Type:</b> Graph</p>
@@ -144,7 +146,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="panel-body-left">
-                            <img id="hybrid_img" style="width: 140px; height: 140px;" class="img-thumbnail" />
+                            <img id="hybrid_img" style="margin: auto; display: block;" class="img-thumbnail" />
                         </div>
                         <div class="panel-body-right">
                             <p><b>Type:</b> Hybrid</p>
