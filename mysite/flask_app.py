@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import render_template, request, json, session
-from mysite import kmeans, key, intensity
+from mysite import key, intensity, kmeans, watershed, meanshift_cv
 from PIL import Image
 import os
 import uuid
@@ -146,3 +146,87 @@ def runthresholding():
         return json.dumps({'filename':filename, 'time':runtime, 'thres': thres})
     else:
         print "Could not run intensity thresholding: image not saved in session"
+
+@app.route('/runmeanshift')
+def runmeanshift():
+    img_path = ""
+    folder_path = ""
+
+    # Start a timer
+    start = time.time()
+
+    # Read original image from session variable
+    if 'imgfile_original' in session:
+        img_path = os.path.join(app.config['UPLOAD_FOLDER'], session['imgfile_original'])
+        folder_path = str(session['imgfile_original']).split('/')[0]
+
+    if img_path is not None:
+        result = meanshift_cv.meanshift_cv(img_path)
+        img = Image.fromarray(result)
+        filename = folder_path + '/meanshift.png'
+        img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        # Stop the timer
+        end = time.time()
+        runtime = end - start
+
+        # Return file URL and time taken to do kmeans
+        return json.dumps({'filename':filename, 'time':runtime})
+    else:
+        print "Could not run mean shift: image not saved in session"
+
+@app.route('/rungraphcut')
+def rungraphcutt():
+    img_path = ""
+    folder_path = ""
+
+    # Start a timer
+    start = time.time()
+
+    # Read original image from session variable
+    if 'imgfile_original' in session:
+        img_path = os.path.join(app.config['UPLOAD_FOLDER'], session['imgfile_original'])
+        folder_path = str(session['imgfile_original']).split('/')[0]
+
+    if img_path is not None:
+        result = grabcut.grab_cut(img_path, (0,100,480,320))
+        img = Image.fromarray(result)
+        filename = folder_path + '/graphcut.png'
+        img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        # Stop the timer
+        end = time.time()
+        runtime = end - start
+
+        # Return file URL and time taken to do kmeans
+        return json.dumps({'filename':filename, 'time':runtime})
+    else:
+        print "Could not run graph cut: image not saved in session"
+
+@app.route('/runhybrid')
+def runhybrid():
+    img_path = ""
+    folder_path = ""
+
+    # Start a timer
+    start = time.time()
+
+    # Read original image from session variable
+    if 'imgfile_original' in session:
+        img_path = os.path.join(app.config['UPLOAD_FOLDER'], session['imgfile_original'])
+        folder_path = str(session['imgfile_original']).split('/')[0]
+
+    if img_path is not None:
+        result = watershed.watershed(img_path)
+        img = Image.fromarray(result)
+        filename = folder_path + '/hybrid.png'
+        img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        # Stop the timer
+        end = time.time()
+        runtime = end - start
+
+        # Return file URL and time taken to do kmeans
+        return json.dumps({'filename':filename, 'time':runtime})
+    else:
+        print "Could not run hybrid: image not saved in session"

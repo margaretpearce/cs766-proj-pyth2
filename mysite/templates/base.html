@@ -149,7 +149,7 @@
 
             // Set and show progress bars
             var progvalue = 10;
-            updateProgess(progvalue, 'true');
+            updateProgess(progvalue, true);
             $("#progress_bars").show();
 
             // K-Means
@@ -164,8 +164,25 @@
                         progvalue = progvalue + (90 / numalgs);
 
                         // Update progress bars
-                        updateProgess(progvalue, 'true');
+                        updateProgess(progvalue, true);
                     }
+                });
+            }
+
+            // Mean shift
+            if (runmeanshift === true) {
+                $.get({
+                   url: '/runmeanshift' ,
+                   dataType: 'json',
+                   success: function(meanshift_data) {
+                        $('#meanshift_img').attr('src', '/static/uploads/' + meanshift_data.filename);
+                        $('#meanshift_time').text('Time taken: ' + meanshift_data.time + ' seconds');
+                        // $('#hybrid_parameters').text('Threshold value: ' + thres_data.thres);
+                        progvalue = progvalue + (90 / numalgs);
+
+                        // Update progress bars
+                        updateProgess(progvalue, true);
+                   }
                 });
             }
 
@@ -181,25 +198,62 @@
                         progvalue = progvalue + (90 / numalgs);
 
                         // Update progress bars
-                        updateProgess(progvalue, 'true');
+                        updateProgess(progvalue, true);
                    }
                 });
             }
 
-            // Other algorithms here...
+            // Graph cut
+            if (rungraphcut === true) {
+                $.get({
+                   url: '/rungraphcut' ,
+                   dataType: 'json',
+                   success: function(graphcut_data) {
+                        $('#graphcut_img').attr('src', '/static/uploads/' + graphcut_data.filename);
+                        $('#graphcut_time').text('Time taken: ' + graphcut_data.time + ' seconds');
+                        // $('#hybrid_parameters').text('Threshold value: ' + thres_data.thres);
+                        progvalue = progvalue + (90 / numalgs);
+
+                        // Update progress bars
+                        updateProgess(progvalue, true);
+                   }
+                });
+            }
+
+            // Hybrid
+            if (runhybrid === true) {
+                $.get({
+                   url: '/runhybrid' ,
+                   dataType: 'json',
+                   success: function(hybrid_data) {
+                        $('#hybrid_img').attr('src', '/static/uploads/' + hybrid_data.filename);
+                        $('#hybrid_time').text('Time taken: ' + hybrid_data.time + ' seconds');
+                        // $('#hybrid_parameters').text('Threshold value: ' + thres_data.thres);
+                        progvalue = progvalue + (90 / numalgs);
+
+                        // Update progress bars
+                        updateProgess(progvalue, true);
+                   }
+                });
+            }
 
             // Stop animating the progress bar + input, show results
             $("#app").hide();
-            updateProgess(progvalue, false);
-            $("#progress_bars").hide();
+            // updateProgess(progvalue, false);
+            // $("#progress_bars").hide();
             $("#app_results").show();
         });
 
         // Update value of progress bar and toggle animation
         updateProgess = function(progvalue, keepanimated) {
-            if (keepanimated) {
+            if (keepanimated === true) {
                 $('.progress-bar').addClass('active');
             } else {
+                $('.progress-bar').removeClass('active');
+            }
+
+            // Stop the animation if progress = 100%
+            if (progvalue == 100) {
                 $('.progress-bar').removeClass('active');
             }
 

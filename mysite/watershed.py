@@ -1,10 +1,10 @@
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 
 def watershed(path):
 	image = cv2.imread(path)
-	gray_image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+	gray_image = cv2.cvtColor(image, cv2.cv.CV_BGR2GRAY)
 	ret,thresh = cv2.threshold(gray_image,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 	foreground = cv2.erode(thresh, None, iterations = 3)
 	background = cv2.dilate(thresh, None, iterations = 3)
@@ -16,7 +16,10 @@ def watershed(path):
 	m = cv2.convertScaleAbs(marker32)
 	ret,thresh = cv2.threshold(m,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 	res = cv2.bitwise_and(image,image,mask = thresh)
-	plt.imshow(res)
-	plt.show()
-	
-watershed('baboon.jpg')
+
+	return res
+
+	#plt.imshow(res)
+	#plt.show()
+
+#watershed('baboon.jpg')

@@ -1,6 +1,6 @@
 import cv2
-import numpy as np
-from matplotlib import pyplot as plt
+# import numpy as np
+# from matplotlib import pyplot as plt
 
 
 def meanshift_cv(path):
@@ -8,9 +8,9 @@ def meanshift_cv(path):
 	spatial_window = 14
 	color_window = 51
 	shifted = cv2.pyrMeanShiftFiltering(image, spatial_window, color_window)
-	plt.imshow(shifted)
-	plt.show()
+	return shifted
+	# plt.imshow(shifted)
+	# plt.show()
 
+# meanshift_cv('baboon.jpg')
 
-meanshift_cv('baboon.jpg')
-	
