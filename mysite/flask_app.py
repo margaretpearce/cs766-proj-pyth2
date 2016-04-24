@@ -86,8 +86,8 @@ def examples():
 def kmeansapp():
     return render_template('kmeans.html', title='K Means')
 
-@app.route('/runkmeans')
-def runkmeans():
+@app.route('/runkmeans/<kval>')
+def runkmeans(kval):
     img_path = ""
     folder_path = ""
 
@@ -100,7 +100,7 @@ def runkmeans():
         folder_path = str(session['imgfile_original']).split('/')[0]
 
     # Fix the number of clusters
-    k = 3
+    k = int(kval)
 
     if img_path is not None:
         # Do k means clustering

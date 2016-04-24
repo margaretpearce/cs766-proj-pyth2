@@ -17,10 +17,23 @@ body {
     width: auto;
 }
 
-.panel-body-left, .panel-body-right {
-    float: left;
-    margin: auto;
-    width: 50%;
+@media (min-width: 768px) {
+    .panel-body-left, .panel-body-right {
+        float: left;
+    }
+    .panel-body-left-half {
+        width: 50%;
+        margin: auto;
+        float: left;
+    }
+
+    .panel-body-left-half > img {
+        margin-bottom: 0pt;
+    }
+}
+
+.panel-body-left-half > img {
+    margin-bottom: 10pt !important;
 }
 
 .panel-body-right {

@@ -121,46 +121,76 @@
 
         // Handle button click to run algorithms
         $("#processbutton").click(function() {
+            // Get settings
+            kvalue = $('#value_k_slider').val();
+            runkmeans = $("#alg1").is(":checked");
+            runmeanshift = $("#alg2").is(":checked");
+            runthresholding = $("#alg3").is(":checked");
+            rungraphcut = $("#alg4").is(":checked");
+            runhybrid = $("#alg5").is(":checked");
+
+            numalgs = 0;
+
+            if (runkmeans === true) {
+                numalgs = numalgs + 1;
+            }
+            if (runmeanshift === true) {
+                numalgs = numalgs + 1;
+            }
+            if (runthresholding === true) {
+                numalgs = numalgs + 1;
+            }
+            if (rungraphcut === true) {
+                numalgs = numalgs + 1;
+            }
+            if (runhybrid === true) {
+                numalgs = numalgs + 1;
+            }
+
             // Set and show progress bars
             var progvalue = 10;
             updateProgess(progvalue, 'true');
             $("#progress_bars").show();
 
             // K-Means
-            $.get({
-                url: '/runkmeans',
-                dataType: 'json',
-                success: function(kmeans_data) {
-                    $('#kmeans_img').attr('src', '/static/uploads/' + kmeans_data.filename);
-                    $('#kmeans_time').text('Time taken: ' + kmeans_data.time + ' seconds' );
-                    $('#kmeans_parameters').text('Value of k: ' + kmeans_data.k);
-                    progvalue = progvalue + 22.5;
+            if (runkmeans === true) {
+                $.get({
+                    url: '/runkmeans/'+kvalue,
+                    dataType: 'json',
+                    success: function(kmeans_data) {
+                        $('#kmeans_img').attr('src', '/static/uploads/' + kmeans_data.filename);
+                        $('#kmeans_time').text('Time taken: ' + kmeans_data.time + ' seconds' );
+                        $('#kmeans_parameters').text('Value of k: ' + kmeans_data.k);
+                        progvalue = progvalue + (90 / numalgs);
 
-                    // Update progress bars
-                    updateProgess(progvalue, 'true');
-                }
-            });
+                        // Update progress bars
+                        updateProgess(progvalue, 'true');
+                    }
+                });
+            }
 
             // Thresholding
-            $.get({
-               url: '/runthresholding' ,
-               dataType: 'json',
-               success: function(thres_data) {
-                    $('#thresholding_img').attr('src', '/static/uploads/' + thres_data.filename);
-                    $('#thresholding_time').text('Time taken: ' + thres_data.time + ' seconds' );
-                    $('#thresholding_parameters').text('Threshold value: ' + thres_data.thres);
-                    progvalue = progvalue + 22.5;
+            if (runthresholding === true) {
+                $.get({
+                   url: '/runthresholding' ,
+                   dataType: 'json',
+                   success: function(thres_data) {
+                        $('#thresholding_img').attr('src', '/static/uploads/' + thres_data.filename);
+                        $('#thresholding_time').text('Time taken: ' + thres_data.time + ' seconds' );
+                        $('#thresholding_parameters').text('Threshold value: ' + thres_data.thres);
+                        progvalue = progvalue + (90 / numalgs);
 
-                    // Update progress bars
-                    updateProgess(progvalue, 'true');
-               }
-            });
+                        // Update progress bars
+                        updateProgess(progvalue, 'true');
+                   }
+                });
+            }
 
             // Other algorithms here...
 
             // Stop animating the progress bar + input, show results
             $("#app").hide();
-            updateProgess(progvalue, 'false');
+            updateProgess(progvalue, false);
             $("#progress_bars").hide();
             $("#app_results").show();
         });

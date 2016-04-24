@@ -20,16 +20,41 @@
 
             <form role="form" method="post">
             <div class="input-group" style="margin: auto; width: 100%;">
-                <div style="float: left; width: 50%; margin: auto;">
+                <div class="panel-body-left-half">
                     <img id="imgUploaded" style="width: 300px; height: 300px; margin: auto; display: block;" class="img-thumbnail" />
                 </div>
-                <div style="float: left; width: 50%; margin: auto;">
+
+                <div class="panel-body-left-half">
+
                     <div class="fileUpload btn btn-primary btn-lg" style="margin: auto; display: block; width: 60%">
                         <span>Upload</span>
                         <input type="file" id="imgupload" name="file" accept=".png, .jpg, .jpeg" class="upload" />
                     </div>
                     <br/>
                     <button id="processbutton" name="processbutton" disabled="disabled" class="btn btn-lg btn-secondary" type="button" style="margin: auto; display: block; width: 60%">Segment image</button>
+
+
+                    <div>
+                            <br/>
+                            <b><p>Settings</p></b>
+                            <i>Algorithms:</i><br/>
+                            <input type="checkbox" name="alg1" id="alg1" value="K-Means" checked="checked"> K-Means&nbsp;
+                            <input type="checkbox" name="alg2" id="alg2" value="Mean Shift" checked="checked">Mean Shift&nbsp;
+                            <input type="checkbox" name="alg3" id="alg3" value="Thresholding" checked="checked">Thresholding&nbsp;
+                            <input type="checkbox" name="alg4" id="alg4" value="Graph Cut" checked="checked">Graph Cut&nbsp;
+                            <input type="checkbox" name="alg5" id="alg5" value="Hybrid" checked="checked">Hybrid
+                            <br/><br/>
+                            <i># of colors (2-6):</i>
+                            <input type="range" name="value_k" id="value_k_slider" min="2" max="6" value="3" step="1" list="steplist">
+                            <datalist id="steplist">
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                            </datalist>
+                    </div>
+                    </div>
                 </div>
             </div>
         </form>
