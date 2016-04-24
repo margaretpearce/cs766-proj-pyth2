@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import render_template, request, json, session
-from mysite import key, intensity, kmeans, watershed, meanshift_cv
+from mysite import key, intensity, kmeans, watershed, meanshift_cv, grabcut
 from PIL import Image
 import os
 import uuid
@@ -175,13 +175,18 @@ def runmeanshift():
     else:
         print "Could not run mean shift: image not saved in session"
 
-@app.route('/rungraphcut')
-def rungraphcutt():
+@app.route('/rungrabcut/<x>/<y>/<width>/<height>/')
+def rungrabcut(x, y, width, height):
     img_path = ""
     folder_path = ""
 
     # Start a timer
     start = time.time()
+
+    r_x = int(x)
+    r_y = int(y)
+    r_width = int(width)
+    r_height = int(height)
 
     # Read original image from session variable
     if 'imgfile_original' in session:
@@ -189,7 +194,7 @@ def rungraphcutt():
         folder_path = str(session['imgfile_original']).split('/')[0]
 
     if img_path is not None:
-        result = grabcut.grab_cut(img_path, (0,100,480,320))
+        result = grabcut.grab_cut(img_path, r_x, r_y, r_width, r_height)
         img = Image.fromarray(result)
         filename = folder_path + '/graphcut.png'
         img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))

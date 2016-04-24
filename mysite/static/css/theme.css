@@ -57,3 +57,13 @@ body {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+.selectiondiv {
+    border:1px dashed black;
+    background:#D9FF00;
+    opacity:0.4;
+    filter:alpha(opacity=40);
+    margin:0px;
+    padding:0px;
+    display:none;
+}
