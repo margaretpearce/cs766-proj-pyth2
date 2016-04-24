@@ -20,7 +20,7 @@ def watershed(path):
 	closing = cv2.dilate(opening,kernel, iterations=2)
 	ret, markers = cv2.connectedComponents(closing)
 	markers = markers+1
-	markers = cv2.watershed(img,markers)
+	markers = cv2.watershed(image,markers)
 	colors_used=[]
 
 	for mark in np.unique(markers):
