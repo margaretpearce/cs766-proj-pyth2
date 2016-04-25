@@ -24,7 +24,7 @@ def watershed(path):
 	colors_used=[]
 
 	for mark in np.unique(markers):
-		if mark == 0:
+		if mark == 1:
 			continue
 		r = lambda: random.randint(0, 255)
 		color = [r(), r(), r()]
