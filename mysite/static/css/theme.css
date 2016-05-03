@@ -67,3 +67,13 @@ body {
     padding:0px;
     display:none;
 }
+
+#results_table img {
+    height: 50%;
+}
+
+.table-responsive {
+    width: 110%;
+    margin: auto;
+    margin-left: -5%;
+}

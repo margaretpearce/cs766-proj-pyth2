@@ -278,8 +278,8 @@
             'SelectionSelector'           : '#selector'
         };
 
-        var x = 100;
-        var y = 100;
+        var x = 125;
+        var y = 125;
         var r_width = 50;
         var r_height = 50;
 
@@ -348,8 +348,8 @@
                     var posSelector = $('#selector').position();
                     var posBoundary = $('#contentframe').position();
 
-                    x = posSelector.left - posBoundary.left;
-                    y = posSelector.top - posBoundary.top;
+                    x = parseInt(posSelector.left - posBoundary.left);
+                    y = parseInt(posSelector.top - posBoundary.top);
                     r_width = RSEL.width;
                     r_height = RSEL.height;
                 }

@@ -8,7 +8,7 @@
         <h1>Try it out!</h1>
     </div>
     <p>
-        Upload an image below to see how it is segmented by several different algorithms: k-means clustering, thresholding, and graph cut.
+        Upload an image below to see how it is segmented by several different algorithms.
     </p>
 
     <!-- Upload an image and start algorithms -->
@@ -46,8 +46,8 @@
                             <input type="checkbox" name="alg1" id="alg1" value="K-Means" checked="checked"> K-Means&nbsp;
                             <input type="checkbox" name="alg2" id="alg2" value="Mean Shift" checked="checked">Mean Shift&nbsp;
                             <input type="checkbox" name="alg3" id="alg3" value="Thresholding" checked="checked">Thresholding&nbsp;
-                            <input type="checkbox" name="alg4" id="alg4" value="Graph Cut" checked="checked">Graph Cut&nbsp;
-                            <input type="checkbox" name="alg5" id="alg5" value="Hybrid" checked="checked">Hybrid
+                            <input type="checkbox" name="alg4" id="alg4" value="Graph Cut" checked="checked">Grab Cut*&nbsp;
+                            <input type="checkbox" name="alg5" id="alg5" value="Hybrid" checked="checked">Watershed
                             <br/><br/>
                             <i># of colors (2-6):</i>
                             <input type="range" name="value_k" id="value_k_slider" min="2" max="6" value="3" step="1" list="steplist">
@@ -58,6 +58,9 @@
                                 <option>5</option>
                                 <option>6</option>
                             </datalist>
+                            <br/>
+                            <i>* For grab cut: </i> Click and drag to draw a rectangle on the uploaded image to select the foreground.
+                            By default, the center 50x50 rectangle is used.
                     </div>
                     </div>
                 </div>
@@ -153,7 +156,7 @@
                 <!-- Graph -->
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Graph Cut</h3>
+                        <h3 class="panel-title">Grab Cut</h3>
                     </div>
                     <div class="panel-body">
                         <div class="panel-body-left">
@@ -171,14 +174,14 @@
             <div class="col-lg-6">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Hybrid (Clustering + Threshold)</h3>
+                        <h3 class="panel-title">Watershed</h3>
                     </div>
                     <div class="panel-body">
                         <div class="panel-body-left">
                             <img id="hybrid_img" style="margin: auto; display: block;" class="img-thumbnail" />
                         </div>
                         <div class="panel-body-right">
-                            <p><b>Type:</b> Hybrid</p>
+                            <p><b>Type:</b> Hybrid (Clustering + Threshold)</p>
                             <div id="hybrid_time"></div>
                             <div id="hybrid_parameters"></div>
                         </div>

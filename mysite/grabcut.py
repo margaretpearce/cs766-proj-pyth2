@@ -10,7 +10,7 @@ def grab_cut(path, x, y, width, height):
 	mask = np.zeros(image.shape[:2], np.uint8)
 	background = np.zeros((1, 65), np.float64)
 	foreground = np.zeros((1, 65), np.float64)
-	rectangle = (x, y, width, height)
+	rectangle = (int(x), int(y), int(width), int(height))
 
 	#image - input image
 	#mask - mask image of same size as image, initialized with zeros

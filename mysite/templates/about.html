@@ -3,10 +3,11 @@
 
 <!-- Header and brief description -->
 <div class="page-header" id="app_intro">
-    <h1>About image segmentation</h1>
+    <h1>Image Segmentation Algorithms</h1>
 </div>
 <p>
-    Short intro here
+    The following algorithms have been implemented and are ready to test out on your photos:
+    k-means clustering, mean shift, intensity thresholding, graph cut, and watershed.
 </p>
 
 <!-- Description of each algorithm -->
@@ -15,9 +16,20 @@
         <h3 class="panel-title">K-Means</h3>
     </div>
     <div class="panel-body">
-        <div class="container">
-            About k-means
-        </div>
+            <p>
+            The goal of K-Means is to separate the image into a collection of K groups.
+            There are two core steps of the algorithm: selecting centroids and assigning
+            pixels to each centroid. Initially, K centroids are randomly chosen throughout
+            the image. Next, pixels are assigned to their closest centroid. Once all pixels
+            have been categorized, the centroids are recomputed based on their assigned points.
+            The algorithm attempts to minimize the sum of the differences between each point
+            and its cluster centroid (error).
+            </p>
+            <p>
+            The method repeats until the error converges. This approach relies on knowing the
+            value of K upfront. In our implementation, the value is initially set to 3, but can be
+            adjusted by using the slider (# of colors in the image).
+            </p>
     </div>
 </div>
 
@@ -26,9 +38,11 @@
         <h3 class="panel-title">Mean Shift</h3>
     </div>
     <div class="panel-body">
-        <div class="container">
-            About mean shift
-        </div>
+            Mean shift is a clustering algorithm that is not as sensitive to initializations as k-means.
+            It is however, computationally expensive.  It places each data point on a gaussian kernel and
+            iteratively finds peaks or local maxima using probability density estimation.  The only parameter
+            that this algorithm relies on is the bandwidth, or in the case of a gaussian kernel, the standard
+            deviation.
     </div>
 </div>
 
@@ -37,31 +51,33 @@
         <h3 class="panel-title">Intensity Thresholding</h3>
     </div>
     <div class="panel-body">
-        <div class="container">
-            About
-        </div>
+            <p>
+            Thresholding is one of the simplest image segmentation methods. The approach is
+            simple: given a grayscale image, classify the pixels into two groups using a chosen
+            threshold T. This approach relies heavily on the choice of T and is sensitive to noise.
+            In our implementation, we start by using a Gaussian blur to reduce the amount of noise
+            in the image. Next, we leverage Otsu's method to select the appropriate threshold value.
+            Color images are converted to grayscale before running this algorithm.
+            </p>
     </div>
 </div>
 
 <div class="panel panel-primary" id="about_graph">
     <div class="panel-heading">
-        <h3 class="panel-title">Graph Cut</h3>
+        <h3 class="panel-title">Grab Cut</h3>
     </div>
     <div class="panel-body">
-        <div class="container">
-            About
-        </div>
+            GrabCut is an interactive foreground image segmentation algorithm.  The user inputs a rectangle-  areas outside of this rectangle are assumed to be background and areas inside are unknown.  Then a gaussian mixture model is used to create a pixel distribution.  A graph is then made with each pixel being a node and each edge connecting two pixels having a weight.  This weight tells how similar the connected pixels are.
+            There are also two more nodes- source and sink nodes that each pixel is connected to.  The weights associated with the source and sink nodes represent the probability of a pixel being in the foreground or background.   The min cut algorithm is used to cut the graph into two parts such that the sum of the weights of the edges that are cut are minimized.  This process repeats until convergence.
     </div>
 </div>
 
 <div class="panel panel-primary" id="about_hybrid">
     <div class="panel-heading">
-        <h3 class="panel-title">Hybrid</h3>
+        <h3 class="panel-title">Watershed</h3>
     </div>
     <div class="panel-body">
-        <div class="container">
-            About
-        </div>
+            An implementation of the watershed algorithm is used.  It uses topographical gradient descent to segment an image.  High intensity regions are considered to be peaks and low intensity regions are valleys.  Isolated valleys are filled with water or color until other valleys start to merge.  When overflow from one valley to another occurs, a barrier or a segment is built.  This process repeats until all peaks are submerged with water.
     </div>
 </div>
 
